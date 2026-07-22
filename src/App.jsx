@@ -160,15 +160,7 @@ function App() {
 
   const projects = [
     {
-      title: 'Shopping Cart',
-      description: 'A Responsive React Application that showcases a demo shopping cart of differents headsets for sale.',
-      tags: ['Html5', 'CSS3', 'React.js'],
-      github: '#',
-      demo: '#',
-      liveUrl: "https://cart-ul.netlify.app",
-    },
-    {
-      title: 'Jobpall',
+      title: 'To-do-List',
       description: 'High performance Responsive React application for saving and managing jobs, gigs, and tasks efficiently.',
       tags: ['Html5', 'CSS3', 'React.js'],
       github: '#',
@@ -190,7 +182,15 @@ function App() {
       github: '#',
       demo: '#',
       liveUrl: "https://w-countt.netlify.app",
-    }
+    },
+    {
+      title: 'Shopping Cart',
+      description: 'A Responsive React Application that showcases a demo shopping cart of differents headsets for sale.',
+      tags: ['Html5', 'CSS3', 'React.js'],
+      github: '#',
+      demo: '#',
+      liveUrl: "https://cart-ul.netlify.app",
+    },
   ]
 
   const experience = [
