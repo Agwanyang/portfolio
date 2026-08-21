@@ -167,6 +167,7 @@ function App() {
       demo: '#',
       liveUrl: "https://jobpall.netlify.app",
     },
+
     {
       title: 'MovieList',
       description: 'A clean, customizable movie discovery web app built with React.js and Tailwind CSS, featuring movie listings,search, and detailed movie pages powered by an external API.',
@@ -175,6 +176,16 @@ function App() {
       demo: '#',
       liveUrl: "https://moviqs.netlify.app",
     },
+
+    {
+      title: 'GabeezGreenfarms',
+      description: 'An agriTech web application that helps farmers manage farm operations, track agricultural activities,and organize farm-related data through a user-friendly digital platform.',
+      tags: ['React.js', 'Tailwind CSS', 'Firebase', 'Firestore DATABASE'],
+      github: '#',
+      demo: '#',
+      liveUrl: "https://gabeezgreenfarms.netlify.app",
+    },
+
     {
       title: 'WordCounter',
       description: 'A React App that counts characters and words in real time. Built with useState, useRef, and eventhandling.',
@@ -183,6 +194,7 @@ function App() {
       demo: '#',
       liveUrl: "https://w-countt.netlify.app",
     },
+
     {
       title: 'Shopping Cart',
       description: 'A Responsive React Application that showcases a demo shopping cart of differents headsets for sale.',
@@ -191,6 +203,7 @@ function App() {
       demo: '#',
       liveUrl: "https://cart-ul.netlify.app",
     },
+
   ]
 
   const experience = [
@@ -281,12 +294,12 @@ function App() {
               Passionate about bridging the gap between design excellence and clean, modular engineering.
             </p>
             <p className="about-desc">
-              Over the past 2 years, I have worked as a freelance frontend developer across a range of platforms, specializing in performance-driven code, responsive layouts, and seamless user experiences.
+              Over the past 3+ years , I have worked as a freelance frontend developer across a range of platforms, specializing in performance-driven code, responsive layouts, and seamless user experiences.
             </p>
 
             <div className="about-stats">
               <div className="glass-panel stat-item">
-                <span className="stat-num gradient-text">2+</span>
+                <span className="stat-num gradient-text">3+</span>
                 <span className="stat-label">Years Exp</span>
               </div>
               <div className="glass-panel stat-item">
@@ -427,7 +440,7 @@ function App() {
 
               )}
 
-                    <p> Whatsapp number: +2348102861873</p>
+              <p> Whatsapp number: +2348102861873</p>
             </form>
 
           </div>
@@ -438,7 +451,7 @@ function App() {
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Daniel. All rights reserved.</p>
         <p style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
-        Email: agdaniel159@gmail.com
+          Email: agdaniel159@gmail.com
         </p>
       </footer>
     </div>
