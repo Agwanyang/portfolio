@@ -160,6 +160,15 @@ function App() {
       liveUrl: "https://gabeezgreenfarms.netlify.app",
     },
 
+     {
+      title: 'HomeHub NG',
+      description: 'A modern user friendly ral estate platform demo work to make dsicovering and mananing properties simple and convenient',
+      tags: ['React.js', 'Tailwind CSS', 'Firebase', 'Firestore DATABASE'],
+      github: '#',
+      demo: '#',
+      liveUrl: "https://homes-ng.netlify.app",
+    },
+
     {
       title: 'WordCounter',
       description: 'A React App that counts characters and words in real time. Built with useState, useRef, and eventhandling.',
