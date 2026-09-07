@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+/* eslint-disable react/prop-types */
+import { useState } from 'react'
 import photo from './assets/photo.jpeg'
 import './App.css'
 
@@ -15,24 +16,6 @@ const Icons = {
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M18 6 6 18" />
       <path d="m6 6 12 12" />
-    </svg>
-  ),
-  Sun: ({ size = 20, className = "" }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v2" />
-      <path d="M12 20v2" />
-      <path d="m4.93 4.93 1.41 1.41" />
-      <path d="m17.66 17.66 1.41 1.41" />
-      <path d="M2 12h2" />
-      <path d="M20 12h2" />
-      <path d="m6.34 17.66-1.41 1.41" />
-      <path d="m19.07 4.93-1.41 1.41" />
-    </svg>
-  ),
-  Moon: ({ size = 20, className = "" }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
     </svg>
   ),
   ExternalLink: ({ size = 20, className = "" }) => (
@@ -120,18 +103,9 @@ const Icons = {
 }
 
 function App() {
-  const [theme, setTheme] = useState('dark')
   const [menuOpen, setMenuOpen] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -234,19 +208,21 @@ function App() {
           <span className="logo-dot"></span>
         </div>
 
-        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
+        <ul id="primary-navigation" className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <li className="nav-menu-heading">Navigate</li>
           <li><a href="#about" onClick={() => setMenuOpen(false)}>About</a></li>
           <li><a href="#projects" onClick={() => setMenuOpen(false)}>Projects</a></li>
           <li><a href="#experience" onClick={() => setMenuOpen(false)}>Experience</a></li>
           <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
-          <li>
-            <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle Theme">
-              {theme === 'dark' ? <Icons.Sun size={20} /> : <Icons.Moon size={20} />}
-            </button>
-          </li>
         </ul>
 
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+        >
           {menuOpen ? <Icons.X size={24} /> : <Icons.Menu size={24} />}
         </button>
       </nav>
@@ -257,7 +233,7 @@ function App() {
           <div className="hero-text">
             <span className="hero-hello">Welcome to my space</span>
             <h1 className="hero-name">
-              Hi, I'm <span className="gradient-text">Daniel</span>
+              Hi, I&apos;m <span className="gradient-text">Daniel</span>
             </h1>
             <h2 className="hero-title">Crafting Premium Digital Experiences</h2>
             <p className="hero-desc">
@@ -268,7 +244,7 @@ function App() {
                 View My Work
               </a>
               <a href="#contact" className="btn-secondary">
-                Let's Talk <Icons.Sparkles size={20} />
+                Let&apos;s Talk <Icons.Sparkles size={20} />
               </a>
             </div>
           </div>
@@ -338,7 +314,14 @@ function App() {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <div key={index} className="glass-panel project-card">
-              <div className="project-img-placeholder"></div>
+              <div className={`project-img-placeholder project-visual-${index}`} aria-label={`${project.title} interface preview`}>
+                <div className="project-window-bar"><span></span><span></span><span></span></div>
+                <div className="project-visual-content">
+                  <span className="project-visual-kicker">{String(index + 1).padStart(2, '0')} / Digital study</span>
+                  <strong>{project.title}</strong>
+                  <div className="project-visual-lines"><i></i><i></i><i></i></div>
+                </div>
+              </div>
               <div className="project-info">
                 <div className="project-tags">
                   {project.tags.map((tag, tIndex) => (
@@ -348,10 +331,10 @@ function App() {
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-desc">{project.description}</p>
                 <div className="project-links">
-                  <a href={project.github} className="project-link" target='_blank'>
+                  <a href={project.github} className="project-link" target='_blank' rel="noreferrer">
                     <Icons.GitHub size={16} /> Home
                   </a>
-                  <a href={project.liveUrl} className="project-link" target='_blank'>
+                  <a href={project.liveUrl} className="project-link" target='_blank' rel="noreferrer">
                     <Icons.ExternalLink size={16} /> Go live
                   </a>
                 </div>
