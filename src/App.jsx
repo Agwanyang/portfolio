@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import photo from './assets/photo.jpeg'
 import './App.css'
 
@@ -106,7 +106,47 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const brandName = 'Daniel Agwanyang'
+  const footerBrandName = 'DannieCodes'
+  const brandFirstName = brandName.split(' ')[0]
   const recipientEmail = 'agdaniel159@yahoo.com'
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID
+
+  const trackEvent = (action, params = {}) => {
+    if (typeof window === 'undefined' || !window.gtag) return
+    window.gtag('event', action, params)
+  }
+
+  useEffect(() => {
+    if (!measurementId || typeof window === 'undefined') return
+
+    window.dataLayer = window.dataLayer || []
+    window.gtag = window.gtag || function gtag() {
+      window.dataLayer.push(arguments)
+    }
+
+    const scriptId = 'ga-script'
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script')
+      script.id = scriptId
+      script.async = true
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
+      document.head.appendChild(script)
+    }
+
+    const trackPageView = () => {
+      window.gtag('config', measurementId, {
+        page_path: `${window.location.pathname}${window.location.hash}`,
+      })
+    }
+
+    trackPageView()
+    window.addEventListener('hashchange', trackPageView)
+
+    return () => {
+      window.removeEventListener('hashchange', trackPageView)
+    }
+  }, [measurementId])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -115,6 +155,11 @@ function App() {
       const body = encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
       )
+
+      trackEvent('contact_form_submit', {
+        form_name: 'portfolio_contact',
+        email_domain: formData.email.split('@')[1] || 'unknown',
+      })
 
       window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`
       setFormSubmitted(true)
@@ -140,27 +185,18 @@ function App() {
   ]
 
   const projects = [
-    // {
-    //   title: 'To-do-List',
-    //   description: 'High performance Responsive React application for saving and managing jobs, gigs, and tasks efficiently.',
-    //   tags: ['Html5', 'CSS3', 'React.js'],
-    //   github: '#',
-    //   demo: '#',
-    //   liveUrl: "https://jobpall.netlify.app",
-    // },
-
-     {
-      title: 'A Data Driven Company',
-      description: 'Echelon Insights is a sleek, dark-themed landing page for a data-driven group/company that builds what is missing. It pairs bold typography and an orange accent with clear Reach out calls to action.',
+    {
+      title: 'Echelon insights',
+      description: 'This is a sleek, dark-themed landing page for a data-driven group/company that builds what is missing. It pairs bold typography and an orange accent with clear Reach out calls to action.',
       tags: ['React.js', 'Tailwind CSS', 'Database API'],
       github: '#',
       demo: '#',
-      liveUrl: "https://echelon-insights.vercel.app/",
+      liveUrl: 'https://echelon-insights.vercel.app/',
       previewImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
     },
 
     {
-      title: 'MovieList',
+      title: 'FilmNest',
       description: 'A clean, customizable movie discovery web app built with React.js and Tailwind CSS, featuring movie listings,search, and detailed movie pages powered by an external API.',
       tags: ['React.js', 'Tailwind CSS', 'Database API'],
       github: '#',
@@ -185,12 +221,12 @@ function App() {
       tags: ['React.js', 'Tailwind CSS', 'Firebase', 'Firestore DATABASE'],
       github: '#',
       demo: '#',
-      liveUrl: "https://homes-ng.netlify.app",
-      previewImage: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80',
+      liveUrl: 'https://homes-ng.netlify.app',
+      previewImage: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80',
     },
 
     {
-      title: 'WordCounter',
+      title: 'TypeTally',
       description: 'A React App that counts characters and words in real time. Built with useState, useRef, and eventhandling.',
       tags: ['React.js', 'CSS3', 'API'],
       github: '#',
@@ -235,7 +271,7 @@ function App() {
       {/* Navigation */}
       <nav className="navbar">
         <div className="logo-container" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <span className="gradient-text">Daniel</span>
+          <span className="gradient-text">{brandFirstName}</span>
           <span className="logo-dot"></span>
         </div>
 
@@ -263,18 +299,18 @@ function App() {
         <div className="hero-content">
           <div className="hero-text">
             <span className="hero-hello">Welcome to my space</span>
-            <h1 className="hero-name">
-              Hi, I&apos;m <span className="gradient-text">Daniel</span>
+            <h1 className="hero-name hero-brand-name">
+              <span className="gradient-text">DannieCodes</span>
             </h1>
             <h2 className="hero-title">Crafting Premium Digital Experiences</h2>
             <p className="hero-desc">
               I am a Front-end Engineer specializing in building beautiful, fast, and accessible web applications that stand out & a Funds Manager with a keen eye for detail and performance, both in code and in managing forex capital
             </p>
             <div className="hero-buttons">
-              <a href="#projects" className="btn-primary">
+              <a href="#projects" className="btn-primary" onClick={() => trackEvent('cta_click', { button: 'view_my_work' })}>
                 View My Work
               </a>
-              <a href="#contact" className="btn-secondary">
+              <a href="#contact" className="btn-secondary" onClick={() => trackEvent('cta_click', { button: 'lets_talk' })}>
                 Let&apos;s Talk <Icons.Sparkles size={20} />
               </a>
             </div>
@@ -348,6 +384,7 @@ function App() {
               <div className={`project-img-placeholder project-visual-${index}`} aria-label={`${project.title} interface preview`}>
                 <img className="project-preview-image" src={project.previewImage} alt={`${project.title} preview`} />
                 <div className="project-window-bar"><span></span><span></span><span></span></div>
+                <span className="project-preview-badge">Live Preview</span>
                 <div className="project-visual-content">
                   <span className="project-visual-kicker">{String(index + 1).padStart(2, '0')} / Digital study</span>
                   <strong>{project.title}</strong>
@@ -470,11 +507,24 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Daniel. All rights reserved.</p>
-        <p style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
-          Email: agdaniel159@yahoo.com
-        </p>
+      <footer className="site-footer">
+        <div className="footer-top">
+          <p className="footer-powered">Powered by Daniel Agwanyang</p>
+
+          <div className="footer-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href={`mailto:${recipientEmail}`}>Email</a>
+            <a href="https://wa.me/2348102861873" target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
+        </div>
+
+        <div className="footer-wordmark" aria-hidden="true">{footerBrandName}</div>
+
+        <div className="footer-meta">
+          <p>&copy; {new Date().getFullYear()} {footerBrandName}. All rights reserved.</p>
+          <a href={`mailto:${recipientEmail}`}>agdaniel159@yahoo.com</a>
+        </div>
       </footer>
     </div>
   )

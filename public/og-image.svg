@@ -1,0 +1,9 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#201611"/>
+  <rect x="40" y="40" width="1120" height="550" rx="28" fill="#2B1B14" stroke="#A35F3D" stroke-opacity="0.7"/>
+  <circle cx="182" cy="182" r="86" fill="#A35F3D" fill-opacity="0.2"/>
+  <text x="110" y="245" fill="#F5EFE9" font-family="Georgia, serif" font-size="88" font-weight="700">Daniel</text>
+  <text x="110" y="330" fill="#E6B68A" font-family="Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="4">AGWANYANG</text>
+  <text x="110" y="420" fill="#F5EFE9" font-family="Arial, sans-serif" font-size="34" letter-spacing="5">FRONT-END ENGINEER</text>
+  <text x="110" y="470" fill="#D7C7B8" font-family="Arial, sans-serif" font-size="24" letter-spacing="2">Premium digital experiences • Responsive products</text>
+</svg>
