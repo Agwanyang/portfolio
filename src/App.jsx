@@ -106,10 +106,17 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const recipientEmail = 'agdaniel159@yahoo.com'
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (formData.name && formData.email && formData.message) {
+      const subject = encodeURIComponent(`Portfolio enquiry from ${formData.name}`)
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )
+
+      window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`
       setFormSubmitted(true)
       setTimeout(() => {
         setFormSubmitted(false)
@@ -133,13 +140,23 @@ function App() {
   ]
 
   const projects = [
-    {
-      title: 'To-do-List',
-      description: 'High performance Responsive React application for saving and managing jobs, gigs, and tasks efficiently.',
-      tags: ['Html5', 'CSS3', 'React.js'],
+    // {
+    //   title: 'To-do-List',
+    //   description: 'High performance Responsive React application for saving and managing jobs, gigs, and tasks efficiently.',
+    //   tags: ['Html5', 'CSS3', 'React.js'],
+    //   github: '#',
+    //   demo: '#',
+    //   liveUrl: "https://jobpall.netlify.app",
+    // },
+
+     {
+      title: 'A Data Driven Company',
+      description: 'Echelon Insights is a sleek, dark-themed landing page for a data-driven group/company that builds what is missing. It pairs bold typography and an orange accent with clear Reach out calls to action.',
+      tags: ['React.js', 'Tailwind CSS', 'Database API'],
       github: '#',
       demo: '#',
-      liveUrl: "https://jobpall.netlify.app",
+      liveUrl: "https://echelon-insights.vercel.app/",
+      previewImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
     },
 
     {
@@ -149,6 +166,7 @@ function App() {
       github: '#',
       demo: '#',
       liveUrl: "https://moviqs.netlify.app",
+      previewImage: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1200&q=80',
     },
 
     {
@@ -158,6 +176,7 @@ function App() {
       github: '#',
       demo: '#',
       liveUrl: "https://gabeezgreenfarms.netlify.app",
+      previewImage: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80',
     },
 
      {
@@ -167,6 +186,7 @@ function App() {
       github: '#',
       demo: '#',
       liveUrl: "https://homes-ng.netlify.app",
+      previewImage: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80',
     },
 
     {
@@ -176,6 +196,7 @@ function App() {
       github: '#',
       demo: '#',
       liveUrl: "https://w-countt.netlify.app",
+      previewImage: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
     },
 
     {
@@ -185,6 +206,7 @@ function App() {
       github: '#',
       demo: '#',
       liveUrl: "https://cart-ul.netlify.app",
+      previewImage: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80',
     },
 
   ]
@@ -324,6 +346,7 @@ function App() {
           {projects.map((project, index) => (
             <div key={index} className="glass-panel project-card">
               <div className={`project-img-placeholder project-visual-${index}`} aria-label={`${project.title} interface preview`}>
+                <img className="project-preview-image" src={project.previewImage} alt={`${project.title} preview`} />
                 <div className="project-window-bar"><span></span><span></span><span></span></div>
                 <div className="project-visual-content">
                   <span className="project-visual-kicker">{String(index + 1).padStart(2, '0')} / Digital study</span>
@@ -343,7 +366,7 @@ function App() {
                   <a href={project.github} className="project-link" target='_blank' rel="noreferrer">
                     <Icons.GitHub size={16} /> Home
                   </a>
-                  <a href={project.liveUrl} className="project-link" target='_blank' rel="noreferrer">
+                  <a href={project.liveUrl} className="project-link project-live-link" target='_blank' rel="noreferrer">
                     <Icons.ExternalLink size={16} /> Go live
                   </a>
                 </div>
@@ -432,7 +455,14 @@ function App() {
 
               )}
 
-              <p> Whatsapp number: +2348102861873</p>
+              <a
+                href="https://wa.me/2348102861873"
+                target="_blank"
+                rel="noreferrer"
+                className="whatsapp-btn"
+              >
+                WhatsApp Me <Icons.Send size={16} />
+              </a>
             </form>
 
           </div>
@@ -443,7 +473,7 @@ function App() {
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Daniel. All rights reserved.</p>
         <p style={{ marginTop: '0.5rem', fontSize: '0.8rem' }}>
-          Email: agdaniel159@gmail.com
+          Email: agdaniel159@yahoo.com
         </p>
       </footer>
     </div>
