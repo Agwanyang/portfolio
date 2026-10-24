@@ -1,0 +1,2 @@
+[build.environment]
+  VITE_SITE_URL = "https://danniecodes.netlify.app"
